@@ -1,0 +1,29 @@
+'''Zmodyfikuj program z zad. 1 tak, aby przechodząc po kolejnych liczbach przedziału, wypisywać
+tylko liczby parzyste, a nieparzyste – pomijać. Użyj instrukcji continue.'''
+
+x = int(input("Podaj x liczbę: "))
+y = int(input("Podaj y liczbę: "))
+
+if y < x:
+    x,y = y,x
+
+while x <= y:
+    if x % 2 != 0:
+        x += 1
+        continue
+    print(x, end=" ")
+    x += 1
+#chyba działa
+
+    ''' rozwiązanie
+    print("Podaj dwie liczby jdedną większą druga mniejszą")
+x = int(input("Podaj x: "))
+y = int(input("Podaj y: "))
+if y < x:
+    x,y = y,x
+while x <= y:
+    if x % 2:
+        x += 1
+        continue
+    print(x, end=" ")
+    x += 1'''
