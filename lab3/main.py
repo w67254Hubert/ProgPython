@@ -1,1 +1,0 @@
-#czwiczemie while
