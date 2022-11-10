@@ -9,11 +9,14 @@ zestawu 2” albo „Nie ma takiej liczby w obu zestawach”.
 • Utwórz listę zestaw_1_2 będącą złączeniem wartości z list zestaw_1 oraz zestaw_2. Posortuj i wyświetl
 listę'''
 import random
+zestaw_1 = []
+n = int(input("Podaj rozmiar lista: "))
+for i in range(n):
+    x = random.randint(1, 10)
+    zestaw_1.append(x)
+    print(zestaw_1)
 
-x=random.randint(1,10)
-zestaw_1=[]
-u=int(input("jak długa lista"))
-
-zestaw_1
-for i in range(u):
+n = int(input("Podaj rozmiar lista: "))
+zestaw_2 = [random.randint(5, 15) for i in range(n)]
+print(zestaw_2)
 
