@@ -1,3 +1,13 @@
+'''Zadanie 5. Utwórz listę punkty będącą listą punktów zdobytych z pewnego egzaminu przez grupę 15 studentów.
+Punkty niech będą liczbami rzeczywistymi z przedziału [0; 50]. Następnie
+• Wyświetl informację o największej i najmniejszej ilości zdobytych punktów
+• Wyświetl indeks pierwszego wystąpienia punktów podanych przez użytkownika. Jeżeli taka liczba
+punktów nie występuje na liście, wyświetl odpowiedni komunikat
+• Oblicz średnią punktów liczbę punktów z egzaminu
+• Oblicz, ile osób zdobyło punkty powyżej, a ile poniżej średniej
+• Wyświetl punkty poniżej średniej
+• Wyświetl punkty powyżej średniej
+'''
 import random
 punkty=[]
 ponizej=[]
