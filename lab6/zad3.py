@@ -21,4 +21,4 @@ def max(numer1,*args):
     return(a)
 
 print(max(12,13,14,12,123))
-print(max())
+#print(max(s))
