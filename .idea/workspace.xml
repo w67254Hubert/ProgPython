@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ba74e7a-ed79-4863-a67f-fe3d9e5758fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/wejgr2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wst-pdoprog.git.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wst-pdoprog.git.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
