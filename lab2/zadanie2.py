@@ -6,3 +6,4 @@ elif "A" <= litera <= 'Z':
     print("litera jest durza")
 else:
     print("to nie litera")
+""
