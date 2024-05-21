@@ -1,0 +1,13 @@
+
+'''Pętla while pozwala na cykliczne wykonywanie bloku poleceń (instrukcje1), tak długo, jak długo określony
+warunek_logiczny będzie prawdziwy. Blok poleceń instrukcje2 (opcjonalny) wykonywany jest wtedy (i tylko
+wtedy), gdy pętla kończy się normalnie – bez trafienia na instrukcję break.'''
+
+
+x = int(input("Podaj pierwszą liczbę: "))
+y = int(input("Podaj drugą liczbę: "))
+if y < x:
+    x,y = y,x
+while x <= y:
+    print(x, end=" ")
+    x += 1
