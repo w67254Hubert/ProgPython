@@ -15,8 +15,9 @@
 #https://www.kaggle.com/datasets/jacksondivakarr/car-crash-dataset/data
 #Wczytywanie, analiza i wizualizacja danych wypadków samochodowych. język Python
 
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
+
 #wczytaj csv i utwurz plik do zapisu
 data = pd.read_excel("C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\archive\\car.xlsx", sheet_name='p')
 nazwy= list(data.columns)
