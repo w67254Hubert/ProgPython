@@ -170,8 +170,10 @@ class przetwarzanie:
         plt.grid(True)
         plt.show()
 
+# O jeszcze wykres liniowy liniowy tworzyć ilość wypadków na rok i na miesiąc!!!!!
 
-#7 bedziesz miec godziny wypadkow np to predykcje mozesz zrobic np ze od godzin 0-4 najczesciej jest distracted kierowca
+
+#7 bedziesz miec godziny wypadkow np to predykcje mozesz zrobic np ze od godzin/miesiąca najczesciej jest distracted kierowca
 ##zapis do csv
 # path = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\wynik.csv'
 # if os.path.exists(path):
@@ -214,6 +216,7 @@ if os.path.exists(path):
     data.dropna(inplace=True)#wywaliłem na bo psuły kod
 else:
     print("File do not exists")
+    #jak nie ma nie powinno puszczać dalej zrób w menu
     
 przet=przetwarzanie(data)
 #print(przet.getdata())
