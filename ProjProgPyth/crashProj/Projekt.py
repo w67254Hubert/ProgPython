@@ -59,7 +59,6 @@ class przetwarzanie:
 
         i=0
         wszyskie=sum(ilosc)
-
         for x in ilosc:
             proc=(x/wszyskie)*100#peocenty
             if round(proc, 2)<0.01:
@@ -107,7 +106,7 @@ class przetwarzanie:
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
 
         plt.figure(figsize=(10, 6))
-        plt.bar(wartosc, ProcIlosci)
+        plt.bar(wartosc, ilosc)
         plt.ylabel('procętowy rozkład przypadków')
         plt.xlabel('typ obrarzeń')
         plt.title('Podział procentowy przypadków obrażeń')
@@ -219,6 +218,9 @@ else:
 przet=przetwarzanie(data)
 #print(przet.getdata())
 przet.info()
+przet.obrazenia()
+muszisz udoskolalić opisy wszystkiego i pewnie wypisy w rzeczach dodaj jako listy/słowniki do pobrania
+
 # csv.info()
 
 #input("klik by kontynuować")
