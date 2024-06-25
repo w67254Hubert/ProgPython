@@ -31,6 +31,7 @@ class przetwarzanie:
          self.data=data
 
     def info(self):
+        data=self.data
          #sprawdzenie podanego obiektu
         missing_values = data.isnull().sum()
         data_types = data.dtypes
@@ -38,6 +39,7 @@ class przetwarzanie:
         print("typy danch w dataframe \n", data_types)
    
     def IleWypTyp(self):  #1 co spowodowało wypadki i ile tego jest
+        data=self.data
         factor=data['Primary_Factor']
         factorNP=factor.to_numpy()
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
@@ -78,6 +80,7 @@ class przetwarzanie:
 
 
     def ileAutWyp(self):
+        data=self.data
          #2 jaki procent wypadków miały wypadki zawierające więcej niż 3 samochody
         #wykres słupokowy ilości wypadków w zależności od pojazdów uszkodzonych w wypadku?
         factor=data['Collision_Type']
@@ -117,6 +120,7 @@ class przetwarzanie:
 
 
     def obrazenia(self):
+        data=self.data
         #4 ile jest/jaki procent rekordów tworzą z znanym uszkodzeniem ciała injury/unknown
         factor=data['Injury_Type']
         factorNP=factor.to_numpy()
@@ -153,6 +157,7 @@ class przetwarzanie:
         else: print("Anulowano zapis") 
 
     def Weekend(self):
+        data=self.data
         #5 kiedy zdarza się więcej wypadków na dzień w dnie pracy czy weekendy?
         factor=data['Weekend?']
         factorNP=factor.to_numpy()
@@ -195,6 +200,7 @@ class przetwarzanie:
         else: print("Anulowano zapis") 
 
     def ileWypGodz(self):
+        data=self.data
     #6 w jakich godzinach dochodzi do największej liczby wypadków albo wykres liniowy z godzinammi ilością wypadków podczas nich. (napraw te godziny)
     #godzin nie przerabiaj tylko podziel je przez 100 i będize wyglądac nadal dobrze bo potrzebujesz tylko kolejności
 
@@ -233,6 +239,7 @@ class przetwarzanie:
         else: print("Anulowano zapis")
 
     def IleWypMies(self):
+        data=self.data
         factor=data['Month']
 
         factorNP=factor.to_numpy()
@@ -270,6 +277,7 @@ class przetwarzanie:
         else: print("Anulowano zapis") 
         
     def IleWypRok(self):
+        data=self.data
         factor=data['Year']
         factorNP=factor.to_numpy()
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
@@ -306,21 +314,8 @@ class przetwarzanie:
 
 
 #7 bedziesz miec godziny wypadkow np to predykcje mozesz zrobic np ze od godzin/miesiąca najczesciej jest distracted kierowca
-##zapis do csv to będzie dane testowe dla predykcji i dane zpredyktowane w tabelcje jako csv
-
-# path = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\wynik.csv'
-# if os.path.exists(path):
-#     data2 = pd.read_csv(path)
-# else:
-#     print("File does not exist. Creating a new file.")
-#     # Tworzymy przykładowy DataFrame
-#     data2 = pd.DataFrame({
-#         'Brand': ['Toyota', 'Ford', 'BMW'],
-#         'Model': ['Corolla', 'Mustang', 'X5'],
-#         'Year': [2020, 2019, 2018]
-#     })
-#     # Zapisujemy DataFrame do pliku Excel
-#     data2.to_csv(path, index=False)
+# data[2:4]#wyb kolumn 
+##zapis do csv to będzie dane testowe dla predykcji i dane zpredyktowane w tabelcje jako csv(mam funkcje do tego)
 
 
 #do klasy prostego menu konsolowego
@@ -350,7 +345,7 @@ def clear_terminal(): #czysczenie terminala po wykoaniu danego kodu
 #pobieranie csv
 path = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\car.csv'
 if os.path.exists(path):          
-    data = pd.read_csv(path,dtype={
+    dane = pd.read_csv(path,dtype={
     'Year': 'Int64',
     'Month': 'Int64',
     'Day': 'Int64',
@@ -364,23 +359,26 @@ if os.path.exists(path):
     'Longitude':'float',
     })
     print("DataFrame loaded from CSV file.")
-    data = pd.DataFrame(data)
-    data.dropna(inplace=True)#wywaliłem na bo psuły kod
+    dane = pd.DataFrame(dane)
+    dane.dropna(inplace=True)#odrzucone rekordy bez wartości 
 else:
     print("File do not exists")
     #jak nie ma nie powinno puszczać dalej zrób w menu
     
+
 #print(data)
-przet=przetwarzanie(data)
+przet=przetwarzanie(dane)
 
 #print(przet.getdata())
 # przet.info()
-# przet.IleWypTyp()
+przet.IleWypTyp()
 # przet.ileAutWyp()
-przet.obrazenia()
-#muszisz udoskolalić opisy wszystkiego i pewnie wypisy w rzeczach dodaj jako listy/słowniki do pobrania
+# przet.obrazenia()
+# przet.ileWypGodz()
+# przet.IleWypMies()
+# przet.IleWypRok()
+#muszisz udoskolalić opisy wszystkiego i pewnie wypisy w rzeczach
 
-# csv.info()
 
 #input("klik by kontynuować")
 #clear_terminal()
