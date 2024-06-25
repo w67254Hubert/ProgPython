@@ -1,4 +1,5 @@
-Brand,Model,Year
-Toyota,Corolla,2020
-Ford,Mustang,2019
-BMW,X5,2018
+Typ Wypadku,ilość,Udziałw%
+Fatal,115,0.22
+Incapacitating,1076,2.05
+No injury/unknown,40357,76.75
+Non-incapacitating,11034,20.98

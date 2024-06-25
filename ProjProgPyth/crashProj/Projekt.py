@@ -36,12 +36,10 @@ class przetwarzanie:
         data_types = data.dtypes
         print("ilość NA wartoći w dataframe \n",missing_values)
         print("typy danch w dataframe \n", data_types)
-
-    #1 co spowodowało wypadki
-    def IleWypadkow(self):
+   
+    def IleWypTyp(self):  #1 co spowodowało wypadki i ile tego jest
         factor=data['Primary_Factor']
         factorNP=factor.to_numpy()
-        # print(np.unique(factorNP))
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
 
         filtr_indices = ilosc >= 20 #ucinanie przypadków "pojedyńczych" by mniejszyć wykres
@@ -54,20 +52,29 @@ class przetwarzanie:
         plt.xlabel('Typ wypadku drogowego')
         plt.title('Liczba wypadków drogowych według typu')
         plt.xticks(rotation=45, ha='right')#można
-    #   plt.savefig('test.jpg')
+    #   plt.savefig('test.jpg') jest tak bo nie chce zapisywać za karzdym razem jak wyświetlam wykres
         plt.show()
 
-        i=0
+        print("Podsumowanie wykresu")
+        procenty=[]
         wszyskie=sum(ilosc)
         for x in ilosc:
             proc=(x/wszyskie)*100#peocenty
-            if round(proc, 2)<0.01:
-                print(wartosc[i],"wystąpiła",ilosc[i],"a to poniżej 0,1% wypadków!!")
+            procenty.append(round(proc,2))
 
-            else:
-                print(wartosc[i],"wystąpił",ilosc[i],"a to",round(proc, 2),"% wypadków")
-            i+=1
-        #I to np do tablicy albo zapisać w csv.
+        wynik = dict({
+             "Typ Wypadku": wartosc ,
+                "ile": ilosc,
+                "Udział%":procenty })
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
+
+        #return(wynik) #poda nam dataframe który potem będziemy mogli zapisać albo odczytać
+            #szybko morzna to zapisać
 
 
     def ileAutWyp(self):
@@ -81,23 +88,34 @@ class przetwarzanie:
         plt.figure(figsize=(10, 6))
         plt.bar(wartosc, ilosc)
         plt.ylabel('Ilość przypadków')
-        plt.xlabel('rodzaj uczestnika ruchu w wypadku')
+        plt.xlabel('Typ uczestnika ruchu w wypadku')
         plt.title('Liczba uczestników ruchu biorących udział w wypadku')
         plt.xticks(rotation=45, ha='right')#można
         #   plt.savefig('test.jpg')
 
         plt.show()
 
+        print("Podsumowanie wykresu")
+        procenty=[]
         wszyskie=sum(ilosc)
-        i=0
         for x in ilosc:
-                proc=(x/wszyskie)*100
-                if round(proc, 2)<1:
-                    print(wartosc[i],"wystąpiła",ilosc[i],"a to poniżej 1% wypadków")
-                    
-                else:
-                    print(wartosc[i],"wystąpił",ilosc[i],"a to",round(proc, 2),"% wypadków")
-                i+=1
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
+
+        wynik = dict({
+             "Typ Pojazdu": wartosc ,
+                "ile": ilosc,
+                "Udział%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
+
+
     def obrazenia(self):
         #4 ile jest/jaki procent rekordów tworzą z znanym uszkodzeniem ciała injury/unknown
         factor=data['Injury_Type']
@@ -113,17 +131,27 @@ class przetwarzanie:
         plt.xticks(rotation=0, ha='right')
         #   plt.savefig('test.jpg')
         plt.show()
-        #może dodać to do csv czy coś
+
+        print("Podsumowanie wykresu")
+        procenty=[]
         wszyskie=sum(ilosc)
-        i=0
         for x in ilosc:
-                proc=(x/wszyskie)*100
-                if round(proc, 2)<1:
-                    print(wartosc[i],"wystąpiła",ilosc[i],"a to poniżej 1%","brażeń")
-                    
-                else:
-                    print(wartosc[i],"wystąpił",ilosc[i],"a to",round(proc, 2),"%", "obrażeń")
-                i+=1
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
+
+        wynik = dict({
+             "Obrarzenia": wartosc ,
+                "ile": ilosc,
+                "Udziałw%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
+
     def Weekend(self):
         #5 kiedy zdarza się więcej wypadków na dzień w dnie pracy czy weekendy?
         factor=data['Weekend?']
@@ -145,14 +173,28 @@ class przetwarzanie:
         plt.xticks(rotation=0, ha='right')
         #   plt.savefig('test.jpg')
         plt.show()
+        
+        print("Podsumowanie wykresu")
+        procenty=[]
         wszyskie=sum(ilosc)
-        i=0
         for x in ilosc:
-                proc=(x/wszyskie)*100
-                print(wartosc[i],"było",ilosc[i],"wypadków, a to",round(proc, 2),"% wypadków w danych")
-                i+=1
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
 
-    def wypGldzin(self):
+        wynik = dict({
+             "Weekend?": wartosc ,
+                "ile": ilosc,
+                "Udziałw%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
+
+    def ileWypGodz(self):
     #6 w jakich godzinach dochodzi do największej liczby wypadków albo wykres liniowy z godzinammi ilością wypadków podczas nich. (napraw te godziny)
     #godzin nie przerabiaj tylko podziel je przez 100 i będize wyglądac nadal dobrze bo potrzebujesz tylko kolejności
 
@@ -169,12 +211,103 @@ class przetwarzanie:
         plt.xticks(rotation=0, ha='right')
         plt.grid(True)
         plt.show()
+        
+        print("Podsumowanie wykresu")
+        procenty=[]
+        wszyskie=sum(ilosc)
+        for x in ilosc:
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
 
-# O jeszcze wykres liniowy liniowy tworzyć ilość wypadków na rok i na miesiąc!!!!!
+        wynik = dict({
+                "Godzina:": wartosc ,
+                "ile": ilosc,
+                "Udziałw%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis")
+
+    def IleWypMies(self):
+        factor=data['Month']
+
+        factorNP=factor.to_numpy()
+        wartosc,ilosc=np.unique(factorNP,return_counts=True)
+        wartosc=wartosc/100 #poniewarz z jakiegoś popwodu wareości godzinowe są w dziwnym formacie
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(wartosc, ilosc, marker='o', linestyle='-', color='b')
+        plt.ylabel('Procentowy rozkład przypadków')
+        plt.xlabel('Godzina')
+        plt.title('Podział przypadków obrażeń')
+        plt.xticks(rotation=0, ha='right')
+        plt.grid(True)
+        plt.show()
+
+        
+        print("Podsumowanie wykresu")
+        procenty=[]
+        wszyskie=sum(ilosc)
+        for x in ilosc:
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
+
+        wynik = dict({
+                "Miesiąc:": wartosc ,
+                "ile": ilosc,
+                "Udziałw%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
+        
+    def IleWypRok(self):
+        factor=data['Year']
+        factorNP=factor.to_numpy()
+        wartosc,ilosc=np.unique(factorNP,return_counts=True)
+        wartosc=wartosc/100 #poniewarz z jakiegoś popwodu wareości godzinowe są w dziwnym formacie
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(wartosc, ilosc, marker='o', linestyle='-', color='b')
+        plt.ylabel('Procentowy rozkład przypadków')
+        plt.xlabel('Godzina')
+        plt.title('Podział przypadków obrażeń')
+        plt.xticks(rotation=0, ha='right')
+        plt.grid(True)
+        plt.show()
+
+        print("Podsumowanie wykresu")
+        procenty=[]
+        wszyskie=sum(ilosc)
+        for x in ilosc:
+            proc=(x/wszyskie)*100#peocenty
+            procenty.append(round(proc,2))
+
+        wynik = dict({
+                "Rok:": wartosc ,
+                "ile": ilosc,
+                "Udziałw%":procenty })
+        
+        wynik=pd.DataFrame(wynik)
+        print(wynik)
+
+        odp=str(input("czy chcesz zapisać wynik? T/N "))
+        if odp=="T":
+            zapDoCSV(wynik)
+        else: print("Anulowano zapis") 
 
 
 #7 bedziesz miec godziny wypadkow np to predykcje mozesz zrobic np ze od godzin/miesiąca najczesciej jest distracted kierowca
-##zapis do csv
+##zapis do csv to będzie dane testowe dla predykcji i dane zpredyktowane w tabelcje jako csv
+
 # path = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\wynik.csv'
 # if os.path.exists(path):
 #     data2 = pd.read_csv(path)
@@ -191,6 +324,25 @@ class przetwarzanie:
 
 
 #do klasy prostego menu konsolowego
+
+
+def zapDoCSV(zapisz):
+    path = "C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\wynik.csv"
+    if os.path.exists(path):
+        print("taki plik istnieje")
+        x= str(input("czy chcesz zamienić zawatrosć pliku? T/N "))
+        if x=='T':
+
+            os.remove(path)#czemu nie działa?!
+            zapisz.to_csv(path, index=False)
+
+            print("plik został zamieniony")
+            
+        else: print("anulowano zapis")
+    else:
+        print("Zapisano wynik")
+        zapisz.to_csv(path, index=False)
+    
 def clear_terminal(): #czysczenie terminala po wykoaniu danego kodu
 
         os.system('cls')
@@ -218,11 +370,15 @@ else:
     print("File do not exists")
     #jak nie ma nie powinno puszczać dalej zrób w menu
     
+#print(data)
 przet=przetwarzanie(data)
+
 #print(przet.getdata())
-przet.info()
+# przet.info()
+# przet.IleWypTyp()
+# przet.ileAutWyp()
 przet.obrazenia()
-muszisz udoskolalić opisy wszystkiego i pewnie wypisy w rzeczach dodaj jako listy/słowniki do pobrania
+#muszisz udoskolalić opisy wszystkiego i pewnie wypisy w rzeczach dodaj jako listy/słowniki do pobrania
 
 # csv.info()
 
