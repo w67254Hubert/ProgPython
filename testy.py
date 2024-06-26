@@ -65,6 +65,8 @@ sql=connection.execute('''KOMENDA SQL Select''')
 df=pd.DataFrame(sql)
 connection.close()
 print(df)
+
+#do listy jakbyś zapomnniał
 i=0
 lista=[]
 lista.remove(20) #usuwa podaną wartosć 
@@ -83,6 +85,21 @@ sorted(lista) #zwraca kopię listy posortowanej rosnąco;
 krotka=1,2,3
 lista.extend(krotka)
 
+#twoezenie klasy itp
+class test:
+    #wczytaj dane do klasy self to obiekt z danymi 
+    def __init__(self,data=None):
+            self.data=data    
+    def getdata(self):
+         #self data to odwołanie do self i zmiennej data podaje wartosć data
+         return self.data
+    #set data zmienia wartosć zmiennej data
+    def setdata(self,data):
+         self.data=data
+
+    
+
+test.funkcja()
 #sety { } 
 # add dodawanie wartości
 #remove usuwa jak nie ma błąd
