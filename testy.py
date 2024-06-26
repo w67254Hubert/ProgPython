@@ -65,7 +65,7 @@ sql=connection.execute('''KOMENDA SQL Select''')
 df=pd.DataFrame(sql)
 connection.close()
 print(df)
-
+i=0
 lista=[]
 lista.remove(20) #usuwa podaną wartosć 
 lista.append(20)#dodaje podaną wartość
