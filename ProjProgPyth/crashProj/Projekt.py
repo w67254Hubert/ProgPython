@@ -1,6 +1,4 @@
 
-# - wykresy/analiza danych Opis projektu:
-# 0. Strona tytułowa 
 
 #https://www.kaggle.com/datasets/jacksondivakarr/car-crash-dataset/data
 #Wczytywanie, analiza i wizualizacja danych wypadków samochodowych. język Python
