@@ -221,11 +221,7 @@ class przetwarzanie:
         
         wynik=pd.DataFrame(wynik)
         print(wynik)
-
-        odp=str(input("czy chcesz zapisać wynik? T/N "))
-        if odp.upper()=="T":
-            saveToCSV()(wynik)
-        else: print("Anulowano zapis")
+        self.openTextWindow(wynik)
 
     def IleWypMies(self):
         data=self.data
