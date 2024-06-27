@@ -1,4 +1,5 @@
-# Dobrze przygotowany projekt powinien mieć:
+
+#  Dobrze przygotowany projekt powinien mieć:
 # - zaczyt/odczyt danych z pliku (JSON, CSV, inne) lub urządzenia 
 # - przetwarzanie danych 
 # - wykresy/analiza danych Opis projektu:
@@ -416,6 +417,8 @@ else:
 #print(data)
 przet=przetwarzanie(dane)
 menu()
+zapDoCSV(dane)
+nowa="nowa zmienna"
 # Uruchomienie menu
 
 
