@@ -327,7 +327,7 @@ class przetwarzanie:
 
         tk.mainloop()
 
-    def openTextWindow(self,text):
+    def openTextWindow(self,text):#stradznie dziwnie formatuje podanego dataframe
         self.text = text
 
         self.top_level = tk.Toplevel(self.main_window) 
@@ -438,7 +438,6 @@ else:
 
 #urworzenie klasy przetwarzanie
 przet=przetwarzanie(dane)
-
 menu()
 
 
