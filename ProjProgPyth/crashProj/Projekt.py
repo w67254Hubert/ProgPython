@@ -72,7 +72,8 @@ class przetwarzanie:
         #dataframe przekazujemy do okna aby go wyświetlić urzytkownikowi
 
         self.openTextWindow(wynik)
-        
+        print(wynik)
+
 
 
     def ileAutWyp(self):
@@ -146,6 +147,7 @@ class przetwarzanie:
         wynik=pd.DataFrame(wynik)
 
         self.openTextWindow(wynik)
+        print(wynik)
 
 
     def Weekend(self):
@@ -183,6 +185,8 @@ class przetwarzanie:
         
         wynik=pd.DataFrame(wynik)
         self.openTextWindow(wynik)
+        print(wynik)
+
 
     def ileWypGodz(self):
         data=self.data
@@ -255,7 +259,8 @@ class przetwarzanie:
         wynik=pd.DataFrame(wynik)
         print(wynik)
         self.openTextWindow(wynik)
-        
+        print(wynik)
+
     def IleWypRok(self):
         data=self.data
         factor=data['Year']
@@ -288,6 +293,8 @@ class przetwarzanie:
         
         print(wynik)
         self.openTextWindow(wynik)
+        print(wynik)
+
     
 #####################################
 #tworzenie gui
