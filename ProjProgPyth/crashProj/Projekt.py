@@ -1,14 +1,6 @@
 
 # - wykresy/analiza danych Opis projektu:
 # 0. Strona tytułowa 
-# 1. Opis produktu 
-# 2. Schematy akcji lub przypadków użycia 
-# 3. Prezentacja systemu 
-# 4. Bibliografia Styl zgodny ze stylem pracy inż. 
-# Ocena składa się z: 
-# - oceny działającego programu (prezentowanego po dowolnym laboratorium lub na ostatnich zajęciach projektowych) 
-# UWAGA. Można pracować w zespołach dwuosobowych. W takich przypadkach wszyscy autorzy zamieszczają komplet plików na moodlu.
-# Brak plików oznacza ocenę niedostateczną. Proszę prac nie wysyłać na maila.
 
 #https://www.kaggle.com/datasets/jacksondivakarr/car-crash-dataset/data
 #Wczytywanie, analiza i wizualizacja danych wypadków samochodowych. język Python
