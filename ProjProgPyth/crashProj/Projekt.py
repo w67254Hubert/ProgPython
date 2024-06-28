@@ -1,5 +1,4 @@
 
-
 #https://www.kaggle.com/datasets/jacksondivakarr/car-crash-dataset/data
 #Wczytywanie, analiza i wizualizacja danych wypadków samochodowych. język Python
 
@@ -7,15 +6,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import numpy as np
-import seaborn as sns#dalej nie urzyte
 import tkinter as tk
 from tkinter import messagebox
 
+#podaj ścierzkę do folderu w którym znajduje się plik car.csv:
+scieszka = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\'
 
-class przetwarzanie:
+
+class Przetwarzanie:
     #wczytaj csv i utwurz plik do zapisu
-    def __init__(self,data=None):
+    def __init__(self,data=None,path=None):
             self.data=data
+            self.path=path
     def getdata(self):
          return self.data
     def setdata(self,data):
@@ -72,6 +74,7 @@ class przetwarzanie:
         #wykres słupokowy ilości wypadków w zależności od pojazdów uszkodzonych w wypadku?
         factor=data['Collision_Type']
         factorNP=factor.to_numpy()
+
         # print(np.unique(factorNP))
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
 
@@ -257,8 +260,8 @@ class przetwarzanie:
         plt.figure(figsize=(10, 6))
         plt.plot(wartosc, ilosc, marker='o', linestyle='-', color='b')
         plt.ylabel('rozkład ilości przypadków wypadków')
-        plt.xlabel('roku')
-        plt.title('Podział przypadków wzglendem roku')
+        plt.xlabel('Lata')
+        plt.title('Podział przypadków wzglendem Lat')
         plt.xticks(rotation=0, ha='right')
         plt.grid(True)
         plt.show()
@@ -271,7 +274,7 @@ class przetwarzanie:
             procenty.append(round(proc,2))
 
         wynik = dict({
-                "Rok:": wartosc ,
+                "Lata:": wartosc ,
                 "ile": ilosc,
                 "Udziałw%":procenty })
         
@@ -354,9 +357,8 @@ class przetwarzanie:
    ##################################
 
     def saveToCSV(self,zapisz):
-        path = "C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\wynik.csv" 
-        #nie najlepszy sposób bo nie mogę zapisać wielu plików może potem: os.path.join(path, "User/Desktop", "file.txt")
-        os.path.join(path, "User/Desktop", "file.txt")
+        path=os.path.join(self.path, "wynik.csv")
+
         if os.path.exists(path):
             root = tk.Tk()
             root.withdraw() 
@@ -371,8 +373,10 @@ class przetwarzanie:
             root.destroy()
 
         else:
-            print("Zapisano wynik")
             zapisz.to_csv(path, index=False)
+            print("Zapisano wynik")
+
+
     
 
 #menu konsolowe nie jest już wykorzystywane
@@ -406,7 +410,9 @@ def menu():
         clear()
 
 #pobieranie danych z pliku csv 
-path = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\car.csv'
+
+
+path=os.path.join(scieszka, 'car.csv')
 if os.path.exists(path):          
     dane = pd.read_csv(path,dtype={
     'Year': 'Int64',
@@ -424,13 +430,15 @@ if os.path.exists(path):
     print("Załadowano plik CSV.")
     dane = pd.DataFrame(dane)
     dane.dropna(inplace=True)#odrzucone rekordy bez wartości 
+    print("usunęto wartości NA z Danych.")
+
 else:
     print("Brak pliku CSV")
 
 #print(data)
 
 #urworzenie klasy przetwarzanie
-przet=przetwarzanie(dane)
+przet=Przetwarzanie(dane,scieszka)
 menu()
 
 
