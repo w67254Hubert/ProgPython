@@ -8,8 +8,9 @@ import os
 import numpy as np
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import scrolledtext
 
-#podaj ścierzkę do folderu w którym znajduje się plik car.csv:
+#podaj ścierzkę do folderu w którym znajduje się plik carCrash.csv:
 scieszka = 'C:\\Users\\hubla\\Documents\\studia-pliki\\repozytoria\\ProgPython\\ProjProgPyth\\crashProj\\'
 
 
@@ -207,9 +208,11 @@ class Przetwarzanie:
             proc=(x/wszyskie)*100#peocenty
             procenty.append(round(proc,2))
 
+        wartosc = list(map(int, wartosc))
+
         wynik = dict({
                 "Godzina:": wartosc ,
-                "ile": ilosc,
+                "ileWyp": ilosc,
                 "Udziałw%":procenty })
         
         wynik=pd.DataFrame(wynik)
@@ -241,7 +244,7 @@ class Przetwarzanie:
             procenty.append(round(proc,2))
 
         wynik = dict({
-                "Miesiąc:": wartosc ,
+                "Miesiąc:": wartosc,
                 "ile": ilosc,
                 "Udziałw%":procenty })
         
@@ -255,7 +258,6 @@ class Przetwarzanie:
         factor=data['Year']
         factorNP=factor.to_numpy()
         wartosc,ilosc=np.unique(factorNP,return_counts=True)
-        wartosc=wartosc/100 #poniewarz z jakiegoś popwodu wareości godzinowe są w dziwnym formacie
 
         plt.figure(figsize=(10, 6))
         plt.plot(wartosc, ilosc, marker='o', linestyle='-', color='b')
@@ -329,10 +331,13 @@ class Przetwarzanie:
         self.top_level = tk.Toplevel(self.main_window) 
 
         self.top_level.title("Podsumowanie do wykresu")
-        # Tworzymy etykietę, która będzie wyświetlać tekst
-        label = tk.Label(self.top_level, text=text)
-        # Umieszczamy etykietę w oknie
-        label.pack(padx=10, pady=10)
+        # # Tworzymy etykietę, która będzie wyświetlać tekst
+        # label = tk.Label(self.top_level, text=text)
+        # # Umieszczamy etykietę w oknie
+        # label.pack(padx=10, pady=10)
+        text_widget = scrolledtext.ScrolledText(self.top_level, wrap=tk.WORD)
+        text_widget.insert(tk.END, text)
+        text_widget.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
 
         self.top_level.protocol("WM_DELETE_WINDOW", self.askToSaveFile)
         self.top_level.wait_window()
@@ -412,7 +417,7 @@ def menu():
 #pobieranie danych z pliku csv 
 
 
-path=os.path.join(scieszka, 'car.csv')
+path=os.path.join(scieszka, 'carCrash.csv')
 if os.path.exists(path):          
     dane = pd.read_csv(path,dtype={
     'Year': 'Int64',
