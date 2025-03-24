@@ -1,0 +1,2 @@
+vintage api nie działa z powodu dozwolonych dziennych requestów w wysokości 25 na darmowym planie co nie jest optymalne
+dla mojego projektu poza tym byłobyto bardzo dobre źrudło 
