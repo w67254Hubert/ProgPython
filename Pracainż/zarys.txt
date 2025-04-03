@@ -5,6 +5,9 @@ o dane rynkowe. Program generuje raporty o wartości portfela, prognozach i ryzy
 danych, analityka finansowa.
 • Techniki: Optymalizacja portfela, programowanie funkcyjne, analiza szeregów czasowych. 
 
+	DODAJ SPOWROTEM DROPDOWN BO CI CHAT GO USUNĄ!
+
+
 wczytuj krypto:
 sprawdź czy krypto nie jest martwe
 przy odpaleniu programu a nie przy przycisku
@@ -23,5 +26,3 @@ zrobić z prise by byłą cene zakupu zczytywaną z json i nie aktualizowaną
 do danych json dodać potem za ile kupiłem np i potem porównania zysków 
 usuwanie zmienić by usuwało konkretną opcje a nie po nazwie
 date zakupu?
-
-DASJKNDASKDNAKDSN
