@@ -26,3 +26,10 @@ zrobić z prise by byłą cene zakupu zczytywaną z json i nie aktualizowaną
 do danych json dodać potem za ile kupiłem np i potem porównania zysków 
 usuwanie zmienić by usuwało konkretną opcje a nie po nazwie
 date zakupu?
+
+Propozycja od matuśkiewicz
+zapisuj dane z predycji jak i satnu porfela w czasie zakupy i pokaż bląd jaki był predykji
+więcej algorytmów przewidywania 
+
+
+UCZENIE MASZYNOWE OD LAB 4 przydatne dziadostwo
