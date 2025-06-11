@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfel Kryptowalut - Krypto Portfel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="panel">
+            <header class="top-nav">
+                <div class="user-info">
+                    <span class="user-icon">👤</span>
+                    User123123
+                </div>
+                <div class="nav-buttons">
+                    <!-- Ten link jest aktywny, bo to strona portfela -->
+                    <a href="portfolio.html" class="nav-button active">Portfel Kryptowalut</a>
+                    <a href="visualizations.html" class="nav-button">Wizualizacje Rynkowe</a>
+                </div>
+                <a href="index.html" class="button logout-button">Wyloguj</a>
+            </header>
+
+            <div class="content-area">
+                <div class="left-section">
+                    <div class="section-box">
+                        <h3>Dodanie aktywów</h3>
+                        <div class="input-group">
+                            <label for="add-crypto-name">Nazwa kryptowaluty</label>
+                            <input type="text" id="add-crypto-name" placeholder="Nazwa Kryptowaluty">
+                        </div>
+                        <div class="input-group">
+                            <label for="add-crypto-amount">Ilość aktywów</label>
+                            <input type="number" id="add-crypto-amount" placeholder="Liczba" min="0" step="any">
+                        </div>
+                        <button class="button primary-button">Dodaj</button>
+                    </div>
+
+                    <div class="section-box full-height">
+                        <h3>Aktywa w portfelu</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>Ilość Aktywów</th>
+                                    <th>Cena</th>
+                                    <th>Wartość</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>exsample</td>
+                                    <td>2.0</td>
+                                    <td>123.22</td>
+                                    <td>111.00</td>
+                                </tr>
+                                <!-- Więcej wierszy można dodać dynamicznie -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="section-box">
+                        <h3>Sprzedaż aktywów</h3>
+                        <div class="input-group">
+                            <label for="sell-crypto-name">Nazwa kryptowaluty</label>
+                            <input type="text" id="sell-crypto-name" placeholder="Nazwa Kryptowaluty">
+                        </div>
+                        <div class="input-group">
+                            <label for="sell-crypto-amount">Ilość aktywów</label>
+                            <input type="number" id="sell-crypto-amount" placeholder="Liczba" min="0" step="any">
+                        </div>
+                        <button class="button primary-button">Sprzedaj</button>
+                    </div>
+
+                    <div class="section-box">
+                        <h3>Lista ostatnio sprzedanych aktywów</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>Ilość Aktywów</th>
+                                    <th>Cena zakupu</th>
+                                    <th>Cena sprzedaży</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>exsample</td>
+                                    <td>1.0</td>
+                                    <td>111.00</td>
+                                    <td>120.00</td>
+                                </tr>
+                                <!-- Więcej wierszy można dodać dynamicznie -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-box">
+                        <h3>Predykcja wartości portfela</h3>
+                        <button class="button primary-button">Aktualizuj Prognozy</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aktualna wartość</th>
+                                    <th>za 7 dni</th>
+                                    <th>za 14 dni</th>
+                                    <th>za 30 dni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100.00</td>
+                                    <td>98.80</td>
+                                    <td>105.02</td>
+                                    <td>120.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-box">
+                        <h3>Optymalizacja portfela</h3>
+                        <button class="button primary-button">Optymalizuj</button>
+                        <textarea placeholder="Oczekiwanie na wynik optymalizacji" rows="3" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

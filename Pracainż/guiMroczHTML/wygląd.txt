@@ -1,0 +1,24 @@
+/webapp/
+  ├── index.html
+  ├── css/
+  │   └── style.css       # Główne style + style wspólne
+  │   └── login.css       # Style specyficzne dla logowania (opcjonalnie)
+  │   └── portfolio.css   # Style specyficzne dla portfela (opcjonalnie)
+  │   └── market.css      # Style specyficzne dla wizualizacji (opcjonalnie)
+  ├── js/
+  │   └── app.js          # Główna logika aplikacji, nawigacja
+  │   └── router.js       # (Opcjonalnie) Bardziej zaawansowane zarządzanie routingiem
+  │   └── auth.js         # (Opcjonalnie) Logika autentykacji
+  ├── panels/
+  │   ├── login.html
+  │   ├── login.js        # JavaScript specyficzny dla panelu logowania
+  │   ├── register.html
+  │   ├── register.js
+  │   ├── portfolio.html
+  │   ├── portfolio.js
+  │   ├── market.html
+  │   ├── market.js
+  ├── assets/
+      ├── fonts/          # Tutaj font Inter
+      └── icons/          # Twoje ikony (user, logout)
+      └── images/         # Inne obrazy

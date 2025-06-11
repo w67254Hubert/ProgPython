@@ -1,0 +1,606 @@
+/* === GLOBALNE I ZMIENNE === */
+:root {
+    --accent1: #35DFE1;
+    --accent1-saturated: #4AB4B6; /* Zmieniona nazwa z reduced na saturated dla większej jasności */
+    --accent2: #A02222;
+    --main-color1: #5F7D77;
+    --bg-card: #485251; /* Tło dla .card */
+    --bg-main: #313636; /* Główne tło dla body i .panel */
+    --text-primary: #FFFFFF;
+    --text-secondary: #202020; /* Ciemny tekst na jasnym tle, np. w polach input */
+    --placeholder-color: #A0A0A0;
+    --table-line-color: #404847; /* Dla borderów w tabeli */
+    --border-input: #B0B0B0; /* Ramka dla inputów */
+
+    --font-family: 'Inter', sans-serif;
+
+    /* Rozmiary czcionek */
+    --fs-xs: 12px;  /* Etykiety pomocnicze, opisy */
+    --fs-sm: 14px;  /* Tekst ogólny, inputy, etykiety pól */
+    --fs-md: 16px;  /* Przyciski, ważne etykiety */
+    --fs-lg: 18px;  /* Tytuły kart, nagłówki sekcji */
+    --fs-xl: 24px;  /* Większe nagłówki */
+    --fs-xxl: 28px; /* Nazwa użytkownika */
+    --fs-display: 48px; /* Główne tytuły paneli (np. "Zaloguj") */
+
+    /* Wagi czcionek */
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    /* Zaokrąglenia */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+
+    /* Cienie */
+    --box-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    /* Przejścia */
+    --transition-duration: 0.35s;
+    --transition-timing: ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    /* align-items: flex-start; */ /* Usunięte - app-container będzie się rozciągał */
+    min-height: 100vh;
+    /* padding-top: 20px; */ /* Usunięte - app-container zajmie całą wysokość */
+    overflow-x: hidden; /* Zapobiega problemom z przejściami */
+}
+
+#app-container {
+    width: 100%;
+    max-width: 1366px; /* Maksymalna szerokość jak w aplikacji desktop */
+    position: relative;
+    overflow: hidden; /* Kluczowe dla ukrywania paneli poza widokiem */
+    /* min-height: 100vh; */ /* Zapewnia, że kontener wypełnia ekran */
+}
+
+/* === STYLE PANELI I PRZEJŚĆ === */
+.panel {
+    width: 100%;
+    min-height: 100vh; /* Panele powinny wypełniać co najmniej wysokość ekranu */
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--bg-main); /* Domyślne tło dla wszystkich paneli */
+    /* Przejście domyślne - "pojawianie się" */
+    transform: scale(0.98) translateY(10px);
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) var(--transition-timing),
+                visibility 0s var(--transition-duration); /* Natychmiastowe ukrycie po zakończeniu */
+}
+
+.panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) var(--transition-timing),
+                visibility 0s 0s; /* Natychmiastowa widoczność przy starcie */
+    z-index: 10;
+}
+
+/* Animacje wyjścia */
+.panel.exiting-left { /* Stary panel ucieka w lewo */
+    opacity: 0;
+    transform: translateX(-50px) scale(0.98);
+}
+.panel.exiting-right { /* Stary panel ucieka w prawo */
+    opacity: 0;
+    transform: translateX(50px) scale(0.98);
+}
+
+/* === STYLE DLA PANELI LOGOWANIA I REJESTRACJI === */
+.login-register-form-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Wyśrodkowanie formularza na panelu */
+    padding: 20px; /* Padding dla całego panelu, nie tylko formularza */
+}
+
+.login-register-form-panel h1 {
+    font-size: var(--fs-display);
+    font-weight: var(--fw-bold);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.login-register-form-panel form {
+    width: 100%;
+    max-width: 400px; /* Szerokość samego formularza */
+    padding: 20px;
+    /* Tło można dać tutaj jeśli formularz ma być wyróżniony od panelu
+    background-color: var(--bg-card); 
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-light); */
+}
+
+/* === OGÓLNE STYLE FORMULARZY === */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--text-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-input);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-sm);
+    font-family: var(--font-family);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input:focus, 
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent1);
+    box-shadow: 0 0 0 2px rgba(53, 223, 225, 0.3);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--placeholder-color);
+    opacity: 1; /* Firefox */
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.form-options label {
+    font-size: var(--fs-sm);
+    margin-bottom: 0; /* Usunięcie dolnego marginesu dla labela w tej grupie */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.form-options input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: var(--accent1); /* Natywny styl dla checkboxa */
+}
+
+.button-group {
+    display: flex;
+    gap: 15px; /* Odstęp między przyciskami */
+    margin-top: 25px;
+}
+.button-group .btn {
+    flex-grow: 1; /* Przyciski zajmują równą szerokość */
+}
+.button-group-single {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+.button-group-single .btn {
+    min-width: 180px; /* Minimalna szerokość dla pojedynczego przycisku */
+}
+
+.form-link {
+    display: block;
+    text-align: center;
+    color: var(--accent1-saturated);
+    text-decoration: none;
+    font-size: var(--fs-sm);
+    margin-top: 20px;
+    transition: color 0.2s ease;
+}
+.form-link:hover {
+    color: var(--accent1);
+    text-decoration: underline;
+}
+
+/* === OGÓLNE STYLE PRZYCISKÓW === */
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    font-family: var(--font-family);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    line-height: 1.5;
+    min-height: 46px; /* Ujednolicona wysokość */
+}
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-accent {
+    background-color: var(--accent1);
+    color: var(--text-secondary); /* Ciemny tekst na jasnym tle akcentu */
+}
+.btn-accent:hover {
+    background-color: var(--accent1-saturated);
+}
+
+.btn-accent-small { /* Dla mniejszych przycisków, np. Dodaj, Generuj */
+    background-color: var(--accent1);
+    color: var(--text-secondary);
+    padding: 8px 15px;
+    font-size: var(--fs-sm);
+    min-height: 38px; /* Dopasowana wysokość */
+}
+.btn-accent-small:hover {
+    background-color: var(--accent1-saturated);
+}
+
+.btn-danger-small { /* Przycisk "Sprzedaj" */
+    background-color: var(--accent2);
+    color: var(--text-primary);
+    padding: 8px 15px;
+    font-size: var(--fs-sm);
+    min-height: 38px;
+}
+.btn-danger-small:hover {
+     background-color: #801111; /* Ciemniejszy czerwony */
+}
+
+/* === NAGŁÓWEK APLIKACJI (DLA ZALOGOWANYCH UŻYTKOWNIKÓW) === */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px; /* Dopasuj padding */
+    background-color: var(--bg-main); /* Lub inny odcień jeśli ma się wyróżniać */
+    border-bottom: 1px solid var(--main-color1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-info .user-icon { /* Używamy Font Awesome */
+    font-size: var(--fs-xxl);
+    color: var(--text-primary);
+}
+#username-display, /* Nazwy użytkownika w różnych panelach */
+#username-display-market {
+    font-size: var(--fs-xxl);
+    font-weight: var(--fw-semibold);
+}
+
+.btn-logout {
+    background-color: transparent;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+    padding: 6px 12px;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    cursor: pointer;
+    display: inline-flex; /* Aby ikona i tekst były w linii */
+    align-items: center;
+    gap: 8px; /* Odstęp między ikoną a tekstem */
+}
+.btn-logout .fa-sign-out-alt { /* Styl ikony wylogowania */
+    font-size: 1em;
+}
+.btn-logout:hover {
+    background-color: var(--accent2);
+    color: var(--text-primary);
+}
+
+.app-nav .nav-tab {
+    background-color: var(--main-color1);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    margin-left: 10px; /* Odstęp między tabami */
+    min-height: 42px; /* Wysokość tabów */
+    transition: background-color 0.2s ease;
+}
+.app-nav .nav-tab.active {
+    background-color: var(--accent1);
+    color: var(--text-secondary);
+    font-weight: var(--fw-semibold);
+}
+.app-nav .nav-tab:hover:not(.active) {
+    background-color: var(--accent1-saturated);
+}
+
+/* === STYLE DLA GŁÓWNYCH PANELI (PORTFOLIO, MARKET) === */
+.main-app-panel { /* Nadpisuje domyślny .panel */
+    padding: 0; /* Padding będzie w .app-header i .panel-content */
+}
+
+.panel-content {
+    padding: 25px 30px; /* Wewnętrzny padding dla treści panelu */
+}
+.panel-content.columns {
+    display: flex;
+    gap: 25px; /* Odstęp między kolumnami */
+}
+.column {
+    flex: 1; /* Domyślnie równe kolumny */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Odstęp między kartami w kolumnie */
+}
+.column.narrow-column { flex: 0 0 320px; /* Stała szerokość dla lewej kolumny w wizualizacjach */ }
+.column.wide-column { flex: 1; /* Prawa kolumna zajmuje resztę */ }
+
+.scrollable-column { /* Dla prawej kolumny w wizualizacjach */
+    max-height: calc(100vh - 70px - 50px); /* Wysokość headera - padding góra/dół */
+    overflow-y: auto;
+    padding-right: 10px; /* Miejsce na scrollbar, jeśli się pojawi */
+}
+
+/* Stylizacja scrollbara (Webkit - Chrome, Safari, Edge) */
+.scrollable-column::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-column::-webkit-scrollbar-track {
+    background: var(--bg-main); 
+    border-radius: var(--border-radius-sm);
+}
+.scrollable-column::-webkit-scrollbar-thumb {
+    background-color: var(--main-color1);
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--bg-main); /* Tworzy efekt "pływającego" scrollbara */
+}
+.scrollable-column::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent1-saturated);
+}
+
+/* === STYLE KART === */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-light);
+    display: flex; /* Dla flex-grow w przypadku tabeli */
+    flex-direction: column; /* Elementy karty w kolumnie */
+}
+.card.no-title-bar { /* Dla kart w lewej kolumnie panelu wizualizacji */
+    padding: 20px; /* Jeśli nie ma paska tytułu, dajemy padding bezpośrednio */
+}
+.card.no-title-bar h3 { /* Tytuł dla kart bez standardowego paska */
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 15px;
+}
+.label-like { /* Dla tekstu "wprowadź nazwę kryptowaluty" */
+    font-size: var(--fs-sm);
+    margin-bottom: 8px;
+    display: block; /* Aby margines zadziałał */
+}
+
+
+.card-title { /* Dla paska tytułowego karty */
+    background-color: var(--main-color1);
+    color: var(--text-primary);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    padding: 12px 20px;
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 48px; /* Aby paski tytułowe miały spójną wysokość */
+}
+.card-title .header-btn { /* Przyciski w nagłówku karty, np. Aktualizuj, Optymalizuj */
+    background-color: var(--accent1);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    font-size: var(--fs-xs); /* Mniejszy font dla tych przycisków */
+    border-radius: var(--border-radius-sm);
+}
+.card-title .header-btn:hover {
+    background-color: var(--accent1-saturated);
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1; /* Pozwala tabeli wewnątrz karty rozciągnąć się */
+}
+
+.form-inline { /* Dla formularzy w jednej linii, np. dodawanie/sprzedaż aktywów */
+    display: flex;
+    gap: 10px;
+    align-items: flex-end; /* Wyrównuje przycisk do dołu pól input/select */
+}
+.form-inline select, .form-inline input {
+    flex-grow: 1;
+}
+.form-inline select { min-width: 150px; } /* Aby select nie był zbyt wąski */
+.form-inline input[type="number"] { max-width: 100px; /* Dla pól "Ilość" */ }
+.form-inline .btn { margin-bottom: 0; /* Usunięcie domyślnego marginesu przycisku */ }
+
+
+/* === STYLE TABEL === */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+}
+.data-table th, .data-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--table-line-color);
+}
+.data-table th {
+    background-color: var(--main-color1); /* Lub inny odcień, aby pasował do tytułu karty */
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+}
+.data-table tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.1); /* Subtelne przyciemnienie co drugiego wiersza */
+}
+.data-table tbody tr:hover {
+    background-color: var(--accent1-saturated);
+    color: var(--text-secondary);
+}
+/* Wyrównanie dla kolumn liczbowych (opcjonalne) */
+.data-table td:nth-child(2), /* Ilość */
+.data-table td:nth-child(3), /* Cena */
+.data-table td:nth-child(4) { /* Wartość */
+    text-align: right;
+}
+.data-table th:nth-child(2),
+.data-table th:nth-child(3),
+.data-table th:nth-child(4) {
+    text-align: right;
+}
+
+
+/* === SEKCJA PREDYKCJI WARTOŚCI (PANEL PORTFELA) === */
+.prediction-area {
+    background-color: var(--accent1);
+    border-radius: var(--border-radius-sm);
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.prediction-area div span { /* Etykieta np. "Aktualna wartość" */
+    display: block;
+    font-size: var(--fs-xs);
+    color: var(--text-primary); /* Biały tekst na tle akcentu */
+    opacity: 0.85;
+    margin-bottom: 4px;
+}
+.prediction-area div strong { /* Wartość liczbowa */
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+}
+
+/* === SEKCJA OPTYMALIZACJI (PANEL PORTFELA) === */
+.optimization-results {
+    width: 100%;
+    min-height: 120px;
+    background-color: var(--text-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-input);
+    border-radius: var(--border-radius-sm);
+    padding: 10px;
+    font-size: var(--fs-sm);
+    font-family: var(--font-family);
+    resize: vertical; /* Umożliwia zmianę wysokości */
+}
+
+/* === SEKCJE W PANELU WIZUALIZACJI === */
+.stats-header, .stats-row { /* Dla "Statystyki Rynku Kryptowaluty" */
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: var(--fs-sm);
+}
+.stats-header { /* "Kluczowe statystyki | Wartość USD" */
+    background-color: var(--main-color1);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 10px;
+    font-weight: var(--fw-medium);
+}
+.stats-row {
+    border-bottom: 1px solid var(--table-line-color);
+}
+.stats-row:last-child {
+    border-bottom: none;
+}
+.stats-row strong { font-weight: var(--fw-semibold); }
+
+.sub-header { /* Np. "% zmiany cen..." */
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.changes-container {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.change-box {
+    flex: 1;
+    border: 1px solid var(--main-color1);
+    border-radius: var(--border-radius-sm);
+    padding: 12px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.1); /* Lekkie tło dla boxów */
+}
+.change-box span { /* Etykieta np. "Zmiana ceny 24h" */
+    display: block;
+    font-size: var(--fs-xs);
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+.change-box strong { 
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+}
+.change-box strong.positive { color: #4CAF50; } /* Kolor zielony dla wzrostu */
+.change-box strong.negative { color: #F44336; } /* Kolor czerwony dla spadku */
+
+.charts-section-title {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--main-color1); /* Linia oddzielająca sekcję wykresów */
+}
+.chart-card { /* Kontener dla pojedynczego wykresu */
+    padding: 15px; /* Padding wokół placeholderu wykresu */
+}
+.chart-placeholder {
+    width: 100%;
+    height: 250px; /* Przykładowa wysokość, dostosuj */
+    background-color: var(--text-primary);
+    color: var(--placeholder-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed var(--placeholder-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-sm);
+    text-align: center;
+}

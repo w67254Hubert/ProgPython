@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Portfolio App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Panel Logowania -->
+    <div id="login-panel" class="auth-panel active-panel">
+        <h1>Zaloguj</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Hasło</label>
+                <input type="password" id="login-password" placeholder="Hasło" required>
+            </div>
+            <div class="form-group form-options">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me" class="checkbox-label">Zapamiętaj mnie</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Zaloguj</button>
+            <button type="button" id="go-to-register" class="btn btn-secondary">Rejestruj</button>
+            <a href="#" class="forgot-password">Zapomniałeś hasła?</a>
+        </form>
+    </div>
+
+    <!-- Panel Rejestracji -->
+    <div id="registration-panel" class="auth-panel">
+        <h1>Rejestracja</h1>
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="reg-username">Nazwa użytkownika</label>
+                <input type="text" id="reg-username" placeholder="Nazwa" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Hasło</label>
+                <input type="password" id="reg-password" placeholder="Hasło" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Rejestruj</button> 
+            <!-- W prototypie jest "Zaloguj", ale "Rejestruj" ma więcej sensu na tym ekranie -->
+            <p class="auth-switch">Masz już konto? <a href="#" id="go-to-login-from-reg">Zaloguj się</a></p>
+        </form>
+    </div>
+
+    <!-- Główny kontener aplikacji (po zalogowaniu) -->
+    <div id="app-container" class="app-main-view">
+        <header class="app-header">
+            <div class="user-info">
+                <img src="img/user-icon.png" alt="User Icon" class="user-icon"> <!-- Placeholder -->
+                <span class="username">User123123</span>
+            </div>
+            <nav class="main-nav">
+                <button id="nav-portfolio" class="nav-btn active">Portfel Kryptowalut</button>
+                <button id="nav-visualization" class="nav-btn">Wizualizacje Rynkowe</button>
+            </nav>
+            <button id="logout-btn" class="btn btn-logout">
+                Wyloguj <img src="img/logout.png" alt="" style="width:1em; height:1em; vertical-align: middle; margin-left: 5px;"> <!-- Dodaj ikonę wylogowania -->
+            </button>
+        </header>
+
+        <!-- Panel Portfela Kryptowalutowego -->
+        <main id="portfolio-panel" class="app-content active-content">
+            <div class="content-column">
+                <section class="content-card">
+                    <h2>Dodanie aktywów</h2>
+                    <form id="add-asset-form" class="asset-form">
+                        <div class="form-row">
+                            <div class="form-group inline-group">
+                                <label for="add-crypto-name">Nazwa kryptowaluty</label>
+                                <input type="text" id="add-crypto-name" placeholder="Nazwa Kryptowaluty">
+                            </div>
+                            <div class="form-group inline-group">
+                                <label for="add-crypto-amount">Ilość aktywów</label>
+                                <input type="number" id="add-crypto-amount" placeholder="Liczba" step="any">
+                            </div>
+                                <button type="submit" class="btn btn-primary btn-small">Dodaj</button>
+
+                        </div>
+                        <!-- <button type="submit" class="btn btn-primary btn-small">Dodaj</button> -->
+                    </form>
+                </section>
+
+                <section class="content-card">
+                    <h2>Aktywa w portfelu</h2>
+                    <div class="table-container-add">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>Ilość Aktywów</th>
+                                    <th>Cena</th>
+                                    <th>Wartość</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolio-assets-table">
+                                <tr>
+                                    <td>example</td>
+                                    <td>2.0</td>
+                                    <td>123.22</td>
+                                    <td>111.00</td>
+                                </tr>
+                                <!-- Dynamicznie dodawane wiersze -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div class="content-column">
+                <section class="content-card">
+                    <h2>Sprzedaż aktywów</h2>
+                    <form id="sell-asset-form" class="asset-form">
+                         <div class="form-row">
+                            <div class="form-group inline-group">
+                                <label for="sell-crypto-name">Nazwa kryptowaluty</label>
+                                <input type="text" id="sell-crypto-name" placeholder="Nazwa Kryptowaluty">
+                            </div>
+                            <div class="form-group inline-group">
+                                <label for="sell-crypto-amount">Ilość aktywów</label>
+                                <input type="number" id="sell-crypto-amount" placeholder="Liczba" step="any">
+                            </div>
+                                <button type="submit" class="btn btn-danger btn-small">Sprzedaj</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="content-card">
+                    <h2>Lista ostatnio sprzedanych aktywów</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>Ilość Aktywów</th>
+                                    <th>Cena zakupu</th>
+                                    <th>Cena sprzedaży</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sold-assets-table">
+                                <tr>
+                                    <td>example</td>
+                                    <td>1.0</td>
+                                    <td>111.00</td>
+                                    <td>120.00</td>
+                                </tr>
+                                <!-- Dynamicznie dodawane wiersze -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-card">
+                    <h2>Predykcja wartości portfela</h2>
+                    <button id="update-forecast-btn" class="btn btn-primary">Aktualizuj Prognozy</button>
+                    <div class="table-container forecast-table">
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Aktualna wartość</th>
+                                    <th>za 7 dni</th>
+                                    <th>za 14 dni</th>
+                                    <th>za 30 dni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="forecast-results-table">
+                                <tr>
+                                    <td>100.00</td>
+                                    <td>98.80</td>
+                                    <td>105.02</td>
+                                    <td>120.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-card">
+                    <h2>Optymalizacja portfela</h2>
+                    <button id="optimize-portfolio-btn" class="btn btn-primary">Optymalizuj</button>
+                    <div id="optimization-results" class="results-box">
+                        Oczekiwanie na wynik optymalizacji
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Panel Wizualizacji -->
+        <main id="visualization-panel" class="app-content">
+            <div class="content-column-thin">
+                <section class="content-card">
+                    <h2>Wybierz kryptowalutę do analizy</h2>
+                    <form id="analyze-crypto-form" class="asset-form">
+                        <div class="form-group">
+                            <label for="analyze-crypto-input">wprowadź nazwę kryptowaluty</label>
+                            <input type="text" id="analyze-crypto-input" placeholder="Nazwa Kryptowaluty">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Generuj</button>
+                    </form>
+                </section>
+                <section class="content-card">
+                    <h2>Lista kryptowalut</h2>
+                     <div class="table-container-add crypto-list-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>cena $</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crypto-list-table">
+                                <tr><td>BTC</td><td>2,4t</td></tr> <!-- 't' to 'tys.'? -->
+                                <tr><td>Ethereum</td><td>300,99b</td></tr> <!-- 'b' to 'mld'? -->
+                                <tr><td>DogeCoin</td><td>34.00 b</td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+                                <tr><td></td><td></td></tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <div class="content-column-wide">
+                <section class="content-card">
+                    <h2>Statystyki Rynku kryptowaluty: <span id="selected-crypto-name-stats"></span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Kluczowe Statystyki</span>
+                            <span class="stat-value" id="stat-key-value">Wartość USD</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Kapitalizacja rynkowa:</span>
+                            <span class="stat-value" id="stat-market-cap">8.74B</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Wolumeny ostatnie 24h:</span>
+                            <span class="stat-value" id="stat-volume-24h">300tys.</span>
+                        </div>
+                    </div>
+                </section>
+                 <section class="content-card">
+                    <h2>% zmiany cen w odniesieniu do ceny w czasie</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item change-item">
+                            <span class="stat-label">Zmiana ceny 24h</span>
+                            <span class="stat-value price-change positive" id="change-24h">+X.XX%</span>
+                        </div>
+                        <div class="stat-item change-item">
+                            <span class="stat-label">zmiana 7 dni</span>
+                            <span class="stat-value price-change positive" id="change-7d">+Y.YY%</span>
+                        </div>
+                        <div class="stat-item change-item">
+                            <span class="stat-label">zmiana 1 miesiąc</span>
+                            <span class="stat-value price-change negative" id="change-1m">-Z.ZZ%</span>
+                        </div>
+                    </div>
+                </section>
+                <section class="content-card charts-section">
+                    <h2>Wykresy Cenowe</h2>
+                    <div class="charts-container">
+                        <div class="chart-placeholder">
+                            <p class="chart-title">Wykres Ceny kryptowaluty w czasie z predykcją jej wartości agil test</p>
+                            <img src="img/chart-placeholder1.png" alt="Wykres 1"> <!-- Placeholder -->
+                        </div>
+                        <div class="chart-placeholder">
+                            <p class="chart-title">Wykres Ceny kryptowaluty w czasie z predykcją jej wartości agil test2</p>
+                            <img src="img/chart-placeholder2.png" alt="Wykres 2"> <!-- Placeholder -->
+                        </div>
+                         <div class="chart-placeholder">
+                            <p class="chart-title">Wykres Ceny kryptowaluty w czasie z predykcją jej wartości agil test2</p>
+                            <img src="img/chart-placeholder3.png" alt="Wykres 3"> <!-- Placeholder -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

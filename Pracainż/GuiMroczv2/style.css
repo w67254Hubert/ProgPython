@@ -1,0 +1,558 @@
+/* Import czcionki Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --accent1: #35DFE1;
+    --accent1-alt: #4AB4B6; /* Zmniejszona saturacja akcentu1 */
+    --accent2: #A02222;     /* Kolor akcentujący2 (np. dla przycisku Sprzedaj) */
+    --main-color1: #5F7D77; /* Kolor główny 1 (np. obramowania, mniej ważne elementy) */
+    --bg-2: #485251;        /* Tło 2 (dla paneli, kart) */
+    --bg-3: #313636;        /* Tło 3 (główne tło aplikacji) */
+    --text-color: #FFFFFF;
+    --input-bg: #FFFFFF;
+    --input-text-color: #333333; /* Ciemniejszy tekst dla pól input */
+    --placeholder-color: #757575;
+
+    /* Rozmiary tekstu */
+    --font-size-small: 14px; /* Etykiety pomocnicze, opisy */
+    --font-size-base: 16px;  /* Tekst podstawowy, w tabelach */
+    --font-size-medium: 20px; /* Nagłówki sekcji (h2) */
+    --font-size-large: 24px; /* Podtytuły, większe nagłówki */
+    --font-size-xlarge: 48px; /* Tytuły ekranów (h1) */
+    --font-size-username: 32px; /* Nazwa użytkownika */
+}
+
+/* Globalne style */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-3);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: var(--font-size-base);
+    display: flex; /* Do centrowania paneli logowania/rejestracji */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Zapobiega poziomemu przewijaniu */
+}
+
+/* Style dla paneli autoryzacji (Logowanie, Rejestracja) */
+.auth-panel {
+    background-color: var(--bg-2);
+    padding: 30px 40px;
+    border-radius: 8px;
+    width: 90%; /* Dla mniejszych ekranów */
+    max-width: 500px; /* Ograniczenie szerokości, ok 50% typowego desktopu */
+    text-align: center;
+    display: none; /* Ukryte domyślnie */
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.auth-panel.active-panel {
+    display: flex;
+}
+
+.auth-panel h1 {
+    font-size: var(--font-size-xlarge);
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid var(--main-color1);
+    background-color: var(--input-bg);
+    color: var(--input-text-color);
+    font-size: var(--font-size-base);
+}
+.form-group input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Zmienione z space-between */
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-options input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: var(--accent1); /* Stylizuje sam checkbox */
+    width: 18px;
+    height: 18px;
+}
+.form-options .checkbox-label { /* Specjalna klasa dla etykiety checkboxa */
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    margin-bottom: 0; /* Usuwa domyślny margines z label */
+    cursor: pointer;
+}
+
+
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    font-size: var(--font-size-small);
+    color: var(--accent1-alt);
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.auth-switch {
+    margin-top: 20px;
+    font-size: var(--font-size-small);
+}
+.auth-switch a {
+    color: var(--accent1-alt);
+    text-decoration: none;
+    font-weight: 600;
+}
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+
+/* Przyciski */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-align: center;
+    display: inline-block; /* Aby marginesy działały poprawnie */
+}
+
+.btn-primary {
+    background-color: var(--accent1-alt);
+    color: var(--text-color); /* Ciemny tekst na jasnym przycisku */
+}
+.btn-primary:hover {
+    background-color: var(--accent1); /* Jaśniejszy odcień accent1 */
+}
+
+.btn-secondary {
+    background-color: var(--accent1-alt);
+    color: var(--text-color);
+    margin-left: 10px; /* Odstęp między przyciskami Zaloguj/Rejestruj */
+}
+.btn-secondary:hover {
+    background-color: var(--accent1); /* Ciemniejszy odcień accent1-alt */
+}
+.auth-panel .btn { /* Przyciski w panelach auth na całą szerokość */
+    width: 100%;
+    margin-top: 10px; /* Odstęp między przyciskami */
+}
+.auth-panel .btn-secondary {
+    margin-left: 0;
+}
+
+
+.btn-danger {
+    background-color: var(--accent2);
+    color: var(--text-color);
+}
+.btn-danger:hover {
+    background-color: #801b1b; /* Ciemniejszy odcień accent2 */
+}
+
+.btn-small { /* Mniejsze przyciski Dodaj/Sprzedaj */
+    padding: 8px 15px;
+    font-size: var(--font-size-small);
+}
+
+
+/* Główny widok aplikacji */
+.app-main-view {
+    display: none; /* Ukryty domyślnie, pokazywany przez JS */
+    width: 100vw;
+    max-width: 1500px;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden; /* Zapobiega pojawianiu się pasków przewijania na głównym kontenerze */
+}
+.app-main-view.active-panel { /* Klasa do pokazywania głównego widoku */
+    display: flex;
+}
+
+
+/* Nagłówek aplikacji */
+.app-header {
+    background-color: var(--bg-2);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 80px; /* Minimalna wysokość nagłówka */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background-color: var(--main-color1); /* Placeholder background */
+    object-fit: cover;
+}
+
+.username {
+    font-size: var(--font-size-username);
+    font-weight: 600;
+}
+
+.main-nav .nav-btn {
+    /* background-color: transparent;
+    color: var(--text-color);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: var(--font-size-medium);
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease; */
+    background-color: var(--bg-3);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: var(--bg-3) 0.3s ease;
+    text-decoration: none; /* Usuń podkreślenie dla linków */
+    
+}
+.main-nav .nav-btn:hover {
+    /* color: var(--accent1); */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.main-nav .nav-btn.active {
+    /* border-bottom-color: var(--accent1);
+    color: var(--accent1);
+    font-weight: 700; */
+    background-color: var(--main-color1);
+    font-weight: 600;
+}
+
+.btn-logout {
+    background-color: var(--accent2);
+    color: var(--text-color);
+    font-size: var(--font-size-small);
+    padding: 8px 15px;
+}
+.btn-logout:hover {
+    background-color: #801b1b;
+}
+.btn-logout img {
+    filter: invert(100%); /* Jeśli ikona jest czarna, to ją odwróci na biało */
+}
+
+/* Główna zawartość aplikacji (Portfel, Wizualizacje) */
+.app-content {
+    flex-grow: 1; /* Zajmuje pozostałą przestrzeń */
+    display: none; /* Domyślnie ukryte */
+    padding: 25px;
+    gap: 25px; /* Odstęp między kolumnami */
+    overflow-y: auto; /* Przewijanie tylko w pionie, jeśli zawartość jest za długa */
+}
+.app-content.active-content { /* Klasa do pokazywania aktywnej treści */
+    display: flex;
+}
+
+/* Kolumny w treści */
+.content-column {
+    flex: 1; /* Dzieli przestrzeń równo */
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Odstęp między kartami w kolumnie */
+    min-width: 0; /* Zapobiega rozpychaniu przez zbyt szeroką zawartość */
+}
+.content-column-thin {
+    flex: 0 0 350px; /* Stała szerokość dla lewej kolumny w wizualizacjach */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.content-column-wide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    min-width: 0;
+}
+
+
+/* Karty z zawartością */
+.content-card {
+    background-color: var(--bg-2);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.content-card h2 {
+    font-size: var(--font-size-medium);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--main-color1);
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Formularze w kartach (Dodawanie/Sprzedaż aktywów) */
+.asset-form .form-row {
+    display: flex;
+    gap: 15px; /* Odstęp między polami w rzędzie */
+    margin-bottom: 15px;
+}
+.asset-form .inline-group {
+    flex: 1; /* Pola zajmują równą szerokość */
+    margin-bottom: 0; /* Usuwamy dolny margines z form-group */
+}
+
+.asset-form input[type="text"],
+.asset-form input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--main-color1);
+    background-color: var(--input-bg);
+    color: var(--input-text-color);
+    font-size: var(--font-size-small);
+}
+.asset-form input::placeholder {
+    color: var(--placeholder-color);
+}
+.asset-form label {
+    font-size: 12px; /* Mniejsze etykiety w tych formularzach */
+    margin-bottom: 5px;
+}
+.asset-form .btn {
+    margin-top: 10px; /* Odstęp nad przyciskiem */
+}
+#analyze-crypto-form .form-group { /* Specyficzne dla formularza analizy */
+    margin-bottom: 15px;
+}
+#analyze-crypto-form .btn {
+    width: 100%;
+}
+
+
+/* Tabele */
+.table-container {
+    overflow-x: auto; /* Przewijanie tabeli w poziomie, jeśli jest za szeroka */
+    max-height: 250px; /* Ograniczenie wysokości tabeli z przewijaniem */
+    overflow-y: auto;
+}
+
+.table-container-add {
+    overflow-x: auto; 
+    max-height: 600px; 
+    overflow-y: auto;
+}
+
+.crypto-list-table{
+background-color: var(--bg-3);
+    
+}
+
+.forecast-table .table-container-add, .crypto-list-table .table-container { /* Usuwamy ograniczenie dla tych tabel */
+    max-height: none;
+    
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-small);
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--main-color1);
+}
+
+th {
+    background-color: var(--main-color1); /* Lekko ciemniejszy nagłówek tabeli */
+    color: var(--text-color);
+    font-weight: 600;
+    white-space: nowrap; /* Zapobiega łamaniu tekstu w nagłówkach */
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.05); /* Lekkie przyciemnienie co drugiego wiersza */
+}
+tbody tr:hover {
+    background-color: var(--accent1-alt); /* Podświetlenie wiersza */
+    color: var(--text-color);
+}
+
+
+/* Sekcja Predykcji i Optymalizacji */
+.forecast-table { /* Dodatkowa klasa dla tabeli prognoz */
+    margin-top: 15px;
+    color: var(--text-color);
+    border: 1px solid var(--accent1);
+    background-color: var(--accent1-alt);
+
+}
+.forecast-table td {
+    text-align: center;
+}
+.forecast-table th {
+     background-color: var(--accent1-alt);
+
+}
+
+.results-box {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--bg-3); /* Ciemniejsze tło dla wyników */
+    border-radius: 4px;
+    min-height: 80px;
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+    color: var(--text-color); /* Jaśniejszy szary tekst dla placeholder */
+}
+
+/* Sekcja Statystyk (Panel Wizualizacji) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+.stat-item {
+    background-color: var(--bg-3);
+    padding: 12px 15px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column; /* Etykieta nad wartością */
+}
+.stat-label {
+    font-size: 12px;
+    color: #b0bec5; /* Jaśniejszy szary dla etykiet */
+    margin-bottom: 5px;
+}
+.stat-value {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+}
+#selected-crypto-name-stats {
+    color: var(--accent1);
+    font-weight: bold;
+}
+.price-change.positive {
+    color: #4CAF50; /* Zielony dla wzrostów */
+}
+.price-change.negative {
+    color: #F44336; /* Czerwony dla spadków */
+}
+.change-item .stat-value { /* Aby wartości zmian były bardziej widoczne */
+    font-size: var(--font-size-medium);
+}
+
+
+/* Sekcja Wykresów */
+.charts-section h2 {
+    margin-bottom: 15px;
+}
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsywne kolumny dla wykresów */
+    gap: 20px;
+}
+.chart-placeholder {
+    background-color: var(--bg-3);
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+.chart-placeholder img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid var(--main-color1);
+    border-radius: 4px;
+}
+.chart-placeholder .chart-title {
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Media Queries dla mniejszych ekranów desktopowych, jeśli potrzeba */
+@media (max-width: 1200px) {
+    .app-content {
+        flex-direction: column; /* Stack columns on smaller wide screens */
+    }
+    .content-column-thin {
+        flex: 0 0 auto; /* Allow it to shrink */
+        width: 100%;
+    }
+    .charts-container {
+        grid-template-columns: 1fr; /* Jeden wykres na wiersz na mniejszych ekranach */
+    }
+}
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        padding: 15px;
+        min-height: auto;
+    }
+    .user-info, .main-nav, .btn-logout {
+        margin-bottom: 10px;
+    }
+    .main-nav .nav-btn {
+        font-size: var(--font-size-base);
+    }
+    .username {
+        font-size: var(--font-size-large);
+    }
+    .auth-panel {
+        padding: 20px;
+    }
+    .auth-panel h1 {
+        font-size: var(--font-size-large);
+    }
+}

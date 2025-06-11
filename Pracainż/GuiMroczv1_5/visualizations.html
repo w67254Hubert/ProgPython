@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizualizacje Rynkowe - Krypto Portfel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="panel">
+            <header class="top-nav">
+                <div class="user-info">
+                    <span class="user-icon">👤</span>
+                    User123123
+                    <a href="index.html" class="user-logout-link">wyloguj <span class="logout-cross-icon"></span></a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="portfolio.html" class="nav-button">Portfel Kryptowalut</a>
+                    <!-- Ten link jest aktywny, bo to strona wizualizacji -->
+                    <a href="visualizations.html" class="nav-button active">Wizualizacje Rynkowe</a>
+                </div>
+                <a href="index.html" class="button logout-button">Wyloguj <span class="arrow-icon">→</span></a>
+            </header>
+
+            <div class="content-area">
+                <div class="left-section">
+                    <div class="section-box">
+                        <h3>Wybierz kryptowalutę do analizy</h3>
+                        <div class="crypto-selection-row"> <!-- NOWY KONTENER -->
+                            <label for="select-crypto-analysis">wprowadź nazwę kryptowaluty</label>
+                            <select id="select-crypto-analysis">
+                                <option value="" disabled selected>Nazwa Kryptowaluty</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="DOGE">Dogecoin (DOGE)</option>
+                                <option value="XRP">XRP</option>
+                            </select>
+                            <button class="button primary-button small-button">Generuj</button>
+                        </div>
+                    </div>
+
+                    <div class="section-box">
+                        <h3>Lista kryptowalut</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kryptowaluta</th>
+                                    <th>Cena $</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>BTC</td><td>2.41</td></tr>
+                                <tr><td>Ethereum</td><td>300.99B</td></tr>
+                                <tr><td>DogeCoin</td><td>34.00B</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="right-section charts-section">
+                    <div class="section-box">
+                        <h3>Statystyki Rynku kryptowaluty:</h3>
+                        <table class="data-table"> <!-- Dodano klasę do tabeli, by móc stylizować konkretne td -->
+                            <tbody> <!-- Tabela statystyk ma tylko tbody -->
+                                <tr><td>Kluczowe Statystyki</td><td>Wartość USD</td></tr>
+                                <tr><td>Kapitalizacja rynkowa:</td><td>8.74B</td></tr>
+                                <tr><td>Wolumeny ostatnie 24h:</td><td>300tys.</td></tr>
+                            </tbody>
+                        </table>
+                        <h3>% zmiany cen w odniesieniu do ceny w czasie</h3>
+                        <table class="price-changes-table"> <!-- Dodano klasę do tabeli -->
+                            <thead>
+                                <tr><th>Zmiana ceny 24h</th><th>zmiana 7 dni</th><th>zmiana 1 miesiąc</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>+5.01%</td><td>+10.10%</td><td>-10.00%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="chart-grid"> <!-- To teraz flex-column w CSS -->
+                        <div class="chart-box">
+                            <p>Wykres Ceny kryptowaluty w czasie z predykcją jej wartości</p>
+                            <div class="chart-container">
+                                <div class="y-axis-label">Cena USD</div>
+                                <div class="chart-placeholder"></div>
+                                <div class="x-axis-label">data</div>
+                                <div class="chart-legend">
+                                    <span class="legend-item"><span class="line blue"></span>Cena</span>
+                                    <span class="legend-item"><span class="line red-dashed"></span>SMA 7</span>
+                                    <span class="legend-item"><span class="line blue-dashed"></span>Prognoza</span>
+                                    <span class="legend-item"><span class="area-fill"></span>Przedział ufności</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <p>Wykres Ceny kryptowaluty w czasie z predykcją jej wartości</p>
+                            <div class="chart-container">
+                                <div class="y-axis-label">Cena USD</div>
+                                <div class="chart-placeholder"></div>
+                                <div class="x-axis-label">data</div>
+                                <div class="chart-legend">
+                                    <span class="legend-item"><span class="line blue"></span>Cena</span>
+                                    <span class="legend-item"><span class="line red-dashed"></span>SMA 7</span>
+                                    <span class="legend-item"><span class="line blue-dashed"></span>Prognoza</span>
+                                    <span class="legend-item"><span class="area-fill"></span>Przedział ufności</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <p>Wykres Ceny kryptowaluty w czasie z predykcją jej wartości</p>
+                            <div class="chart-container">
+                                <div class="y-axis-label">Cena USD</div>
+                                <div class="chart-placeholder"></div>
+                                <div class="x-axis-label">data</div>
+                                <div class="chart-legend">
+                                    <span class="legend-item"><span class="line blue"></span>Cena</span>
+                                    <span class="legend-item"><span class="line red-dashed"></span>SMA 7</span>
+                                    <span class="legend-item"><span class="line blue-dashed"></span>Prognoza</span>
+                                    <span class="legend-item"><span class="area-fill"></span>Przedział ufności</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
